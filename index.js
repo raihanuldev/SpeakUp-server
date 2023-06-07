@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
@@ -29,11 +29,25 @@ async function run() {
 
     // coures APis
     // top 6 Coures.
-    app.get('/coures',async(req,res)=>{
-        const result = await couresCollection.find().sort({enrolled: -1}).limit(6).toArray();
-        res.send(result);
+    app.get('/coures', async (req, res) => {
+      const result = await couresCollection.find().sort({ enrolled: -1 }).limit(6).toArray();
+      res.send(result);
     })
 
+    // top instructor
+    app.get('/topinstructor', async (req, res) => {
+      const topinstructors = await couresCollection.aggregate([
+        {
+          $group: {
+            _id: '$teacherId',
+            totalEnrollments: { $sum: '$enrolled' },
+          },
+        },
+        { $sort: { totalEnrollments: -1 } },
+        { $limit: 6 }]).toArray();
+      console.log(topinstructors);
+      res.send(topinstructors) 
+    })
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -47,10 +61,10 @@ run().catch(console.dir);
 
 
 
-app.get('/',(req,res)=>{
-    res.send('Assalamualikom.Server Is Running')
+app.get('/', (req, res) => {
+  res.send('Assalamualikom.Server Is Running')
 })
 
-app.listen(port,()=>{
-    console.log('Hey Dev! No pain no gain');
+app.listen(port, () => {
+  console.log('Hey Dev! No pain no gain');
 })

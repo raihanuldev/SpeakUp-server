@@ -1,0 +1,25 @@
+
+ courseCollections.aggregate([
+    {
+      $group: {
+        _id: '$instructor',
+        enrollments: { $sum: '$enrollments'
+            }
+        }
+    },
+    {
+      $sort: { enrollments: -1
+        }
+    },
+    {
+      $limit: 6
+    }
+]).toArray((err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('An error occurred while retrieving the top instructors.');
+    } else {
+      res.json(result);
+    }
+});
+});

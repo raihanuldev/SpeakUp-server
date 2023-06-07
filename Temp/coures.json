@@ -8,6 +8,7 @@
         "enrolled":99,
         "ratings": 4.5,
         "instructorName": "Ayman Sadik",
+        "instructorImage": "https://cdn.elearningindustry.com/wp-content/uploads/2019/10/professional-development-tools-for-teachers.jpg",
         "image": "https://i.ibb.co/txSzxBg/img1.jpg"
     },
     {
@@ -19,6 +20,7 @@
         "enrolled":49,
         "ratings": 4.5,
         "instructorName": "Ayman Sadik",
+        "instructorImage": "https://pictures.dealer.com/s/szottm59dodgellccllc/1243/ca16e074eb309f912453b1ade8db57cex.jpg?impolicy=resize&w=250",
         "image": "https://i.ibb.co/txSzxBg/img1.jpg"
     },
     {
@@ -30,6 +32,7 @@
         "enrolled":79,
         "ratings": 4.5,
         "instructorName": "Ayman Sadik",
+        "instructorImage": "https://pictures.dealer.com/s/szottm59dodgellccllc/1243/ca16e074eb309f912453b1ade8db57cex.jpg?impolicy=resize&w=250",
         "image": "https://i.ibb.co/txSzxBg/img1.jpg"
     },
     {
@@ -41,6 +44,7 @@
         "enrolled":97,
         "ratings": 3.8,
         "instructorName": "Jane Smith",
+        "instructorImage": "https://static.jobscan.co/blog/uploads/jobs-for-former-teachers.png",
         "image": "https://i.ibb.co/vw8wKS4/japan.jpg"
     },
     {
@@ -52,7 +56,8 @@
         "enrolled":87,
         "ratings": 3.8,
         "instructorName": "Jane Smith",
-        "image": "https://i.ibb.co/vw8wKS4/japan.jpg"
+        "image": "https://i.ibb.co/vw8wKS4/japan.jpg",
+        "instructorImage": "https://static.jobscan.co/blog/uploads/jobs-for-former-teachers.png"
     },
     {
         "name": "Learn Japanese Within 30Days",
@@ -62,6 +67,7 @@
         "availableSeats": 5,
         "enrolled":27,
         "ratings": 3.8,
+        "instructorImage": "https://static.jobscan.co/blog/uploads/jobs-for-former-teachers.png",
         "instructorName": "Jane Smith",
         "image": "https://i.ibb.co/vw8wKS4/japan.jpg"
     },
@@ -73,6 +79,7 @@
         "availableSeats": 8,
         "enrolled":89,
         "ratings": 4.2,
+        "instructorImage": "https://pictures.dealer.com/s/szottm59dodgellccllc/1243/ca16e074eb309f912453b1ade8db57cex.jpg?impolicy=resize&w=250",
         "instructorName": "Mark Johnson",
         "image": "https://i.ibb.co/55HNZbP/urdu.jpg"
     },
@@ -84,6 +91,7 @@
         "availableSeats": 8,
         "enrolled":79,
         "ratings": 4.2,
+        "instructorImage": "https://pictures.dealer.com/s/szottm59dodgellccllc/1243/ca16e074eb309f912453b1ade8db57cex.jpg?impolicy=resize&w=250",
         "instructorName": "Mark Johnson",
         "image": "https://i.ibb.co/55HNZbP/urdu.jpg"
     },
@@ -95,6 +103,7 @@
         "availableSeats": 8,
         "enrolled":49,
         "ratings": 4.2,
+        "instructorImage": "https://pictures.dealer.com/s/szottm59dodgellccllc/1243/ca16e074eb309f912453b1ade8db57cex.jpg?impolicy=resize&w=250",
         "instructorName": "Mark Johnson",
         "image": "https://i.ibb.co/55HNZbP/urdu.jpg"
     },
@@ -118,12 +127,14 @@
         "enrolled":72,
         "ratings": 4.2,
         "instructorName": "Niyamote Ali",
+        "instructorImage": "https://media.licdn.com/dms/image/D4D03AQEoD4yyGbQohA/profile-displayphoto-shrink_800_800/0/1676664196553?e=2147483647&v=beta&t=zhXRPbuUrEY-SwBV9GHbRQBOh4OpfE1ppqaQhG0Xm1w",
         "image": "https://i.ibb.co/pPwDd1W/hindi.jpg"
     },
     {
         "name": "Learn HIndi Pro",
         "teacherId":4,
         "price": 99.99,
+        "instructorImage": "https://media.licdn.com/dms/image/D4D03AQEoD4yyGbQohA/profile-displayphoto-shrink_800_800/0/1676664196553?e=2147483647&v=beta&t=zhXRPbuUrEY-SwBV9GHbRQBOh4OpfE1ppqaQhG0Xm1w",
         "details": "Hindi is a widely spoken language primarily in India and also holds the status of an official language in the country. It is one of the most spoken languages globally, with over 500 million speakers. Here are some key aspects of Hindi",
         "availableSeats": 8,
         "enrolled":42,
@@ -139,6 +150,7 @@
         "availableSeats": 8,
         "enrolled":92,
         "ratings": 4.2,
+        "instructorImage": "https://media.licdn.com/dms/image/D4D03AQEoD4yyGbQohA/profile-displayphoto-shrink_800_800/0/1676664196553?e=2147483647&v=beta&t=zhXRPbuUrEY-SwBV9GHbRQBOh4OpfE1ppqaQhG0Xm1w",
         "instructorName": "Hafiz Abu Ahmed",
         "image": "https://i.ibb.co/JmfY5QC/arabic.jpg"
     },
@@ -149,6 +161,7 @@
         "details": "Arabic is a Semitic language spoken by millions of people across the Middle East and North Africa. It holds significant cultural and religious importance as the language of the Quran and is widely used in the Arab world. Here are some key aspects of Arabic",
         "availableSeats": 8,
         "enrolled":40,
+        "instructorImage": "https://media.licdn.com/dms/image/D4D03AQEoD4yyGbQohA/profile-displayphoto-shrink_800_800/0/1676664196553?e=2147483647&v=beta&t=zhXRPbuUrEY-SwBV9GHbRQBOh4OpfE1ppqaQhG0Xm1w",
         "ratings": 4.2,
         "instructorName": "Hafiz Abu Ahmed",
         "image": "https://i.ibb.co/JmfY5QC/arabic.jpg"
@@ -161,6 +174,7 @@
         "availableSeats": 8,
         "enrolled":72,
         "ratings": 4.2,
+        "instructorImage": "https://media.licdn.com/dms/image/D4D03AQEoD4yyGbQohA/profile-displayphoto-shrink_800_800/0/1676664196553?e=2147483647&v=beta&t=zhXRPbuUrEY-SwBV9GHbRQBOh4OpfE1ppqaQhG0Xm1w",
         "instructorName": "Hafiz Abu Ahmed",
         "image": "https://i.ibb.co/JmfY5QC/arabic.jpg"
     },
@@ -172,6 +186,7 @@
         "availableSeats": 8,
         "enrolled":95,
         "ratings": 4.2,
+        "instructorImage": "https://media.licdn.com/dms/image/D4D03AQEoD4yyGbQohA/profile-displayphoto-shrink_800_800/0/1676664196553?e=2147483647&v=beta&t=zhXRPbuUrEY-SwBV9GHbRQBOh4OpfE1ppqaQhG0Xm1w",
         "instructorName": "Hafiz Abu Ahmed",
         "image": "https://i.ibb.co/FWKNK4j/italian.jpg"
     },
@@ -182,6 +197,7 @@
         "details": "Italian is a Romance language spoken primarily in Italy, Switzerland, San Marino, and parts of neighboring countries. It is known for its musicality, rich cultural heritage, and influence on art, music, and cuisine. Here are some key aspects of Italian:",
         "availableSeats": 8,
         "enrolled":65,
+        "instructorImage": "https://pictures.dealer.com/s/szottm59dodgellccllc/1243/ca16e074eb309f912453b1ade8db57cex.jpg?impolicy=resize&w=250",
         "ratings": 4.2,
         "instructorName": "Hafiz Abu Ahmed",
         "image": "https://i.ibb.co/FWKNK4j/italian.jpg"
@@ -195,6 +211,7 @@
         "enrolled":85,
         "ratings": 4.2,
         "instructorName": "Hafiz Abu Ahmed",
+        "instructorImage": "https://pictures.dealer.com/s/szottm59dodgellccllc/1243/ca16e074eb309f912453b1ade8db57cex.jpg?impolicy=resize&w=250",
         "image": "https://i.ibb.co/FWKNK4j/italian.jpg"
     },
     {
@@ -205,6 +222,7 @@
         "availableSeats": 8,
         "enrolled":75,
         "ratings": 4.2,
+        "instructorImage": "https://pictures.dealer.com/s/szottm59dodgellccllc/1243/ca16e074eb309f912453b1ade8db57cex.jpg?impolicy=resize&w=250",
         "instructorName": "Hafiz Abu Ahmed",
         "image": "https://i.ibb.co/FWKNK4j/italian.jpg"
     },
@@ -216,6 +234,7 @@
         "availableSeats": 8,
         "enrolled":85,
         "ratings": 4.2,
+        "instructorImage": "https://pictures.dealer.com/s/szottm59dodgellccllc/1243/ca16e074eb309f912453b1ade8db57cex.jpg?impolicy=resize&w=250",
         "instructorName": "Hafiz Abu Ahmed",
         "image": "https://i.ibb.co/FWKNK4j/italian.jpg"
     }
