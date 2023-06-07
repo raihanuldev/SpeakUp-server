@@ -41,6 +41,8 @@ async function run() {
           $group: {
             _id: '$teacherId',
             totalEnrollments: { $sum: '$enrolled' },
+            instructorName: {$push: {instructor: '$instructorName'}},
+            instructorImage:{$push: {image: '$instructorImage'}}
           },
         },
         { $sort: { totalEnrollments: -1 } },
