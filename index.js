@@ -27,7 +27,6 @@ async function run() {
 
     const couresCollection = client.db('Language').collection('couresCollection');
 
-    // coures APis
     // top 6 Coures.
     app.get('/coures', async (req, res) => {
       const result = await couresCollection.find().sort({ enrolled: -1 }).limit(6).toArray();
@@ -50,6 +49,28 @@ async function run() {
       console.log(topinstructors);
       res.send(topinstructors) 
     })
+
+    app.get('/instructors', async (req, res) => {
+      try {
+        const instructors = await couresCollection.aggregate([
+          {
+            $group: {
+              _id: "$instructorEmail",
+              instructor: { $first: "$$ROOT" }
+            }
+          },
+          {
+            $replaceRoot: { newRoot: "$instructor" }
+          }
+        ]).toArray();
+    
+        res.send(instructors);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+      }
+    });
+    
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");

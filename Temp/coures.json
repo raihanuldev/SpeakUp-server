@@ -1,7 +1,8 @@
 [
     {
         "name": "Complete English Spoking",
-        "teacherId":1,
+        "teacherId":1, 
+        "instructorEmail": "englishsir@gmail.com",
         "price": 49.99,
         "details": "English learning is the process of acquiring the skills and knowledge necessary to understand, speak, read, and write in the English language. English is one of the most widely spoken languages in the world and is considered a lingua franca in many areas, including business, education, and international communication.",
         "availableSeats": 10,
@@ -13,7 +14,7 @@
     },
     {
         "name": "Complete English Learning",
-        "teacherId":1,
+        "teacherId":1, "instructorEmail": "englishsir@gmail.com",
         "price": 49.99,
         "details": "English learning is the process of acquiring the skills and knowledge necessary to understand, speak, read, and write in the English language. English is one of the most widely spoken languages in the world and is considered a lingua franca in many areas, including business, education, and international communication.",
         "availableSeats": 10,
@@ -25,7 +26,7 @@
     },
     {
         "name": "Complete English Learning and Spoking",
-        "teacherId":1,
+        "teacherId":1, "instructorEmail": "englishsir@gmail.com",
         "price": 49.99,
         "details": "English learning is the process of acquiring the skills and knowledge necessary to understand, speak, read, and write in the English language. English is one of the most widely spoken languages in the world and is considered a lingua franca in many areas, including business, education, and international communication.",
         "availableSeats": 10,
@@ -37,7 +38,7 @@
     },
     {
         "name": "Learn Japanese",
-        "teacherId":2,
+        "teacherId":2, "instructorEmail": "japanissir@gmail.com",
         "price": 29.99,
         "details": "japanese's Japanese, is the official language of Japan. It is spoken by approximately 128 million people in Japan and is also used by Japanese communities worldwide. Here are a few key aspects of the Japanese language",
         "availableSeats": 5,
@@ -49,19 +50,20 @@
     },
     {
         "name": "Learn Japanese Advance",
-        "teacherId":2,
+        "teacherId":2, "instructorEmail": "japanissir@gmail.com",
         "price": 29.99,
         "details": "japanese's Japanese, is the official language of Japan. It is spoken by approximately 128 million people in Japan and is also used by Japanese communities worldwide. Here are a few key aspects of the Japanese language",
         "availableSeats": 5,
         "enrolled":87,
         "ratings": 3.8,
         "instructorName": "Jane Smith",
+        
         "image": "https://i.ibb.co/vw8wKS4/japan.jpg",
         "instructorImage": "https://static.jobscan.co/blog/uploads/jobs-for-former-teachers.png"
     },
     {
         "name": "Learn Japanese Within 30Days",
-        "teacherId":2,
+        "teacherId":2, "instructorEmail": "japanissir@gmail.com",
         "price": 29.99,
         "details": "japanese's Japanese, is the official language of Japan. It is spoken by approximately 128 million people in Japan and is also used by Japanese communities worldwide. Here are a few key aspects of the Japanese language",
         "availableSeats": 5,
@@ -73,7 +75,7 @@
     },
     {
         "name": "Learn Urdu Basic ",
-        "teacherId":3,
+        "teacherId":3, "instructorEmail": "urdusir@gmail.com",
         "price": 99.99,
         "details": "Urdu is a rich and poetic language spoken primarily in Pakistan and parts of India. It has a significant cultural and historical importance and is the national language of Pakistan. Here are some key aspects of Urdu",
         "availableSeats": 8,
@@ -85,7 +87,7 @@
     },
     {
         "name": "Learn Urdu Pro ",
-        "teacherId":3,
+        "teacherId":3, "instructorEmail": "urdusir@gmail.com",
         "price": 99.99,
         "details": "Urdu is a rich and poetic language spoken primarily in Pakistan and parts of India. It has a significant cultural and historical importance and is the national language of Pakistan. Here are some key aspects of Urdu",
         "availableSeats": 8,
@@ -97,7 +99,7 @@
     },
     {
         "name": "Learn Urdu Advance",
-        "teacherId":3,
+        "teacherId":3, "instructorEmail": "urdusir@gmail.com",
         "price": 99.99,
         "details": "Urdu is a rich and poetic language spoken primarily in Pakistan and parts of India. It has a significant cultural and historical importance and is the national language of Pakistan. Here are some key aspects of Urdu",
         "availableSeats": 8,
@@ -109,7 +111,7 @@
     },
     {
         "name": "Learn HIndi ",
-        "teacherId":4,
+        "teacherId":4, "instructorEmail": "hindisir@gmail.com",
         "price": 99.99,
         "details": "Hindi is a widely spoken language primarily in India and also holds the status of an official language in the country. It is one of the most spoken languages globally, with over 500 million speakers. Here are some key aspects of Hindi",
         "availableSeats": 8,
@@ -120,7 +122,7 @@
     },
     {
         "name": "Learn HIndi Advance ",
-        "teacherId":4,
+        "teacherId":4, "instructorEmail": "hindisir@gmail.com",
         "price": 99.99,
         "details": "Hindi is a widely spoken language primarily in India and also holds the status of an official language in the country. It is one of the most spoken languages globally, with over 500 million speakers. Here are some key aspects of Hindi",
         "availableSeats": 8,
@@ -132,7 +134,7 @@
     },
     {
         "name": "Learn HIndi Pro",
-        "teacherId":4,
+        "teacherId":4, "instructorEmail": "hindisir@gmail.com",
         "price": 99.99,
         "instructorImage": "https://media.licdn.com/dms/image/D4D03AQEoD4yyGbQohA/profile-displayphoto-shrink_800_800/0/1676664196553?e=2147483647&v=beta&t=zhXRPbuUrEY-SwBV9GHbRQBOh4OpfE1ppqaQhG0Xm1w",
         "details": "Hindi is a widely spoken language primarily in India and also holds the status of an official language in the country. It is one of the most spoken languages globally, with over 500 million speakers. Here are some key aspects of Hindi",
@@ -144,7 +146,7 @@
     },
     {
         "name": "Learn Arabic ",
-        "teacherId":5,
+        "teacherId":5, "instructorEmail": "arabic@gmail.com",
         "price": 99.99,
         "details": "Arabic is a Semitic language spoken by millions of people across the Middle East and North Africa. It holds significant cultural and religious importance as the language of the Quran and is widely used in the Arab world. Here are some key aspects of Arabic",
         "availableSeats": 8,
@@ -156,7 +158,7 @@
     },
     {
         "name": "Learn Arabic  Basic",
-        "teacherId":5,
+        "teacherId":5, "instructorEmail": "arabic@gmail.com",
         "price": 99.99,
         "details": "Arabic is a Semitic language spoken by millions of people across the Middle East and North Africa. It holds significant cultural and religious importance as the language of the Quran and is widely used in the Arab world. Here are some key aspects of Arabic",
         "availableSeats": 8,
@@ -168,7 +170,7 @@
     },
     {
         "name": "Learn Arabic PRo",
-        "teacherId":5,
+        "teacherId":5, "instructorEmail": "arabic@gmail.com",
         "price": 99.99,
         "details": "Arabic is a Semitic language spoken by millions of people across the Middle East and North Africa. It holds significant cultural and religious importance as the language of the Quran and is widely used in the Arab world. Here are some key aspects of Arabic",
         "availableSeats": 8,
@@ -180,7 +182,7 @@
     },
     {
         "name": "Learn Italian ",
-        "teacherId":6,
+        "teacherId":6, "instructorEmail": "italian@gmail.com",
         "price": 99.99,
         "details": "Italian is a Romance language spoken primarily in Italy, Switzerland, San Marino, and parts of neighboring countries. It is known for its musicality, rich cultural heritage, and influence on art, music, and cuisine. Here are some key aspects of Italian:",
         "availableSeats": 8,
@@ -192,7 +194,7 @@
     },
     {
         "name": "Learn Italian Pro ",
-        "teacherId":6,
+        "teacherId":6, "instructorEmail": "italian@gmail.com",
         "price": 99.99,
         "details": "Italian is a Romance language spoken primarily in Italy, Switzerland, San Marino, and parts of neighboring countries. It is known for its musicality, rich cultural heritage, and influence on art, music, and cuisine. Here are some key aspects of Italian:",
         "availableSeats": 8,
@@ -204,7 +206,7 @@
     },
     {
         "name": "Learn Italian beginner ",
-        "teacherId":6,
+        "teacherId":6, "instructorEmail": "italian@gmail.com",
         "price": 99.99,
         "details": "Italian is a Romance language spoken primarily in Italy, Switzerland, San Marino, and parts of neighboring countries. It is known for its musicality, rich cultural heritage, and influence on art, music, and cuisine. Here are some key aspects of Italian:",
         "availableSeats": 8,
@@ -216,7 +218,7 @@
     },
     {
         "name": "Learn Italian with 15 Days ",
-        "teacherId":6,
+        "teacherId":6, "instructorEmail": "italian@gmail.com",
         "price": 99.99,
         "details": "Italian is a Romance language spoken primarily in Italy, Switzerland, San Marino, and parts of neighboring countries. It is known for its musicality, rich cultural heritage, and influence on art, music, and cuisine. Here are some key aspects of Italian:",
         "availableSeats": 8,
@@ -228,11 +230,11 @@
     },
     {
         "name": "Learn Italian Advance",
-        "teacherId":6,
+        "teacherId":6, "instructorEmail": "italian@gmail.com",
         "price": 99.99,
         "details": "Italian is a Romance language spoken primarily in Italy, Switzerland, San Marino, and parts of neighboring countries. It is known for its musicality, rich cultural heritage, and influence on art, music, and cuisine. Here are some key aspects of Italian:",
         "availableSeats": 8,
-        "enrolled":85,
+        "enrolled":42,
         "ratings": 4.2,
         "instructorImage": "https://pictures.dealer.com/s/szottm59dodgellccllc/1243/ca16e074eb309f912453b1ade8db57cex.jpg?impolicy=resize&w=250",
         "instructorName": "Hafiz Abu Ahmed",
