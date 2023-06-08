@@ -27,6 +27,7 @@ async function run() {
 
     const couresCollection = client.db('Language').collection('couresCollection');
 
+    // Public Apis
     // top 6 Coures.
     app.get('/coures', async (req, res) => {
       const result = await couresCollection.find().sort({ enrolled: -1 }).limit(6).toArray();
@@ -70,6 +71,12 @@ async function run() {
         res.status(500).send("Internal Server Error");
       }
     });
+    // All Class
+    app.get('/allclasses',async (req,res)=>{
+      const apporvedCoures = await couresCollection.find({status:"approved"});
+      const result = await apporvedCoures.toArray();
+      res.send(result);
+    })
     
 
     await client.db("admin").command({ ping: 1 });
