@@ -8,6 +8,7 @@ const port = process.env.PORT || 5000;
 
 // middleWare
 app.use(cors())
+app.use
 
 // const uri = "mongodb+srv://<username>:<password>@cluster0.jvqibpv.mongodb.net/?retryWrites=true&w=majority";
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.jvqibpv.mongodb.net/?retryWrites=true&w=majority`;
@@ -26,6 +27,7 @@ async function run() {
     await client.connect();
 
     const couresCollection = client.db('Language').collection('couresCollection');
+    const usersCollection = client.db('Language').collection('usersCollection');
 
     // Public Apis
     // top 6 Coures.
@@ -50,7 +52,7 @@ async function run() {
       console.log(topinstructors);
       res.send(topinstructors) 
     })
-
+// all Instructors
     app.get('/instructors', async (req, res) => {
       try {
         const instructors = await couresCollection.aggregate([
@@ -71,13 +73,31 @@ async function run() {
         res.status(500).send("Internal Server Error");
       }
     });
-    // All Class
+// All Class
     app.get('/allclasses',async (req,res)=>{
       const apporvedCoures = await couresCollection.find({status:"approved"});
       const result = await apporvedCoures.toArray();
       res.send(result);
     })
-    
+  /************************************/  
+  app.get('/users',async(req,res)=>{
+    const users = await usersCollection.find().toArray();
+    res.send(users)
+  })
+  // Received Data.
+  app.post('/users',async(req,res)=>{
+    const user = req.body;
+    const query = {email: user.email};
+    const exitingUser = await usersCollection.find(query);
+    if(exitingUser){
+     return res.send({message: "User Alredy Exiting On Database"})
+    }
+    const result= await usersCollection.insertOne(user);
+    res.send(result);
+  })
+
+
+
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
