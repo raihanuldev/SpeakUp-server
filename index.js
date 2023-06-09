@@ -74,18 +74,26 @@ async function run() {
       }
     });
 // All Class
-    app.get('/allclasses',async (req,res)=>{
+    app.get('/allclasses', async (req,res)=>{
       const apporvedCoures = await couresCollection.find({status:"approved"});
       const result = await apporvedCoures.toArray();
       res.send(result);
     })
-  /************************************/  
-  app.get('/users',async(req,res)=>{
+
+    app.post('/newclass', async(req,res)=>{
+      const item = req.body;
+      console.log(item)
+      const result = await couresCollection.insertOne(item);
+      res.send(result)
+    })
+
+  app.get('/users', async(req,res)=>{
     const result = await usersCollection.find().toArray();
     res.send(result)
   })
+
   // Received Data.
-  app.post('/users',async(req,res)=>{
+  app.post('/users', async(req,res)=>{
     const user = req.body;
     console.log(user)
     const query = {email:user.email};
