@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 
 // middleWare
 app.use(cors())
-app.use
+app.use(express.json())
 
 // const uri = "mongodb+srv://<username>:<password>@cluster0.jvqibpv.mongodb.net/?retryWrites=true&w=majority";
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.jvqibpv.mongodb.net/?retryWrites=true&w=majority`;
@@ -49,7 +49,7 @@ async function run() {
         },
         { $sort: { totalEnrollments: -1 } },
         { $limit: 6 }]).toArray();
-      console.log(topinstructors);
+      
       res.send(topinstructors) 
     })
 // all Instructors
@@ -80,17 +80,15 @@ async function run() {
       res.send(result);
     })
   /************************************/  
-  app.get('/users',async(req,res)=>{
-    const users = await usersCollection.find().toArray();
-    res.send(users)
-  })
+  
   // Received Data.
   app.post('/users',async(req,res)=>{
     const user = req.body;
-    const query = {email: user.email};
-    const exitingUser = await usersCollection.find(query);
+    console.log(user)
+    const query = {email:user.email};
+    const exitingUser =await usersCollection.findOne(query);
     if(exitingUser){
-     return res.send({message: "User Alredy Exiting On Database"})
+      return res.send({messgae: 'User Alredy exiting on Database'})
     }
     const result= await usersCollection.insertOne(user);
     res.send(result);
