@@ -87,9 +87,13 @@ async function run() {
       const result = await couresCollection.insertOne(item);
       res.send(result)
     })
+    // WARNING! IAM CHANGED USERS API>>>>
 // users Apis
-  app.get('/users', async(req,res)=>{
-    const result = await usersCollection.find().toArray();
+  app.get('/user', async(req,res)=>{
+    const email = req.query.email;
+    const query = {email:email}
+    // console.log(query);
+    const result = await usersCollection.findOne(query);
     res.send(result)
   })
 
@@ -106,7 +110,17 @@ async function run() {
     res.send(result);
   })
 
-  // Carts
+  // Carts apis
+  app.get('/carts', async(req,res)=>{
+    const email = req.query.email;
+    console.log(email);
+    if(!email){
+      return res.send([])
+    }
+    const query = {email:email};
+    const result = await cartCollection.find(query).toArray();
+    res.send(result)
+  })
   app.post('/carts', async(req,res)=>{
     const item = req.body;
     const result = await cartCollection.insertOne(item);
