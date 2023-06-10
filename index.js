@@ -28,6 +28,7 @@ async function run() {
 
     const couresCollection = client.db('Language').collection('couresCollection');
     const usersCollection = client.db('Language').collection('usersCollection');
+    const cartCollection = client.db('Language').collection('cartCollection');
 
     // Public Apis
     // top 6 Coures.
@@ -86,7 +87,7 @@ async function run() {
       const result = await couresCollection.insertOne(item);
       res.send(result)
     })
-
+// users Apis
   app.get('/users', async(req,res)=>{
     const result = await usersCollection.find().toArray();
     res.send(result)
@@ -105,6 +106,12 @@ async function run() {
     res.send(result);
   })
 
+  // Carts
+  app.post('/carts', async(req,res)=>{
+    const item = req.body;
+    const result = await cartCollection.insertOne(item);
+    res.send(result);
+  })
 
 
 
