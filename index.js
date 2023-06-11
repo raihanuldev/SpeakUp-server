@@ -80,7 +80,20 @@ async function run() {
     app.post('/payments', async (req,res)=>{
       const payment = req.body;
       const result = await paymentCollection.insertOne(payment);
+      console.log(payment);
+      if(result.insertedId){
+        const cartId = payment.couresId;
+        const deleteResult =await cartCollection.deleteOne({cartId:cartId})
+
+        if (deleteResult.deletedCount === 1) {
+          console.log('Item removed from cartCollection');
+        } else {
+          console.log('Item not found in cartCollection');
+        }
+      }
+
       res.send(result)
+
     })
 
 
@@ -143,6 +156,7 @@ async function run() {
     res.send(result);
   })
   // 
+  
 
   // Payment Intent
   app.post('/create-payment-intent', async (req,res)=>{
