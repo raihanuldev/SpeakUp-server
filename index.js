@@ -194,7 +194,14 @@ async function run() {
       const result = await cartCollection.insertOne(item);
       res.send(result);
     })
-    // 
+    // Single Cart Remove
+    app.delete('/carts', async (req,res)=>{
+      const couresId = req.body;
+      const query = couresId;
+      const result = await cartCollection.deleteOne(query);
+      res.send(result)
+    }) 
+    
 
 
     // Payment Intent
@@ -214,7 +221,7 @@ async function run() {
     // Payment Histroy
     app.get('/payment-history', async(req,res)=>{
       const email = req.query.email;
-      console.log(email);
+      // console.log(email);
       const query = {email:email};
       const paymentHistory = await paymentCollection.find(query).sort({date:-1}).toArray();
       res.send(paymentHistory)
