@@ -90,7 +90,10 @@ async function run() {
           const couresId = payment.couresId;
           const updateResult = await couresCollection.updateOne(
             { _id: new ObjectId(couresId) },
-            { $inc: { enrolled: 1 } }
+            { $inc: { 
+              enrolled: 1,
+              availableSeats: -1
+             } }
           );
 
           if (updateResult.modifiedCount === 1) {
