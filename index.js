@@ -211,6 +211,14 @@ async function run() {
       })
     })
 
+    // Payment Histroy
+    app.get('/payment-history', async(req,res)=>{
+      const email = req.query.email;
+      console.log(email);
+      const query = {email:email};
+      const paymentHistory = await paymentCollection.find(query).sort({date:-1}).toArray();
+      res.send(paymentHistory)
+    })
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
