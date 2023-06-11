@@ -4,7 +4,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
-
+const stripe = require('stripe')(process.env.DB_PAYMENT_KEY)
 
 // middleWare
 app.use(cors())
@@ -29,6 +29,7 @@ async function run() {
     const couresCollection = client.db('Language').collection('couresCollection');
     const usersCollection = client.db('Language').collection('usersCollection');
     const cartCollection = client.db('Language').collection('cartCollection');
+    const paymentCollection = client.db('Language').collection('paymentCollection');
 
     // Public Apis
     // top 6 Coures.
@@ -74,6 +75,16 @@ async function run() {
         res.status(500).send("Internal Server Error");
       }
     });
+
+    // Payment Releted Apis
+    app.post('/payments', async (req,res)=>{
+      const payment = req.body;
+      const result = await paymentCollection.insertOne(payment);
+      res.send(result)
+    })
+
+
+
 // All Class
     app.get('/allclasses', async (req,res)=>{
       const apporvedCoures = await couresCollection.find({status:"approved"});
@@ -113,7 +124,7 @@ async function run() {
   // Carts apis
   app.get('/carts', async(req,res)=>{
     const email = req.query.email;
-    console.log(email);
+    // console.log(email);
     if(!email){
       return res.send([])
     }
@@ -123,10 +134,29 @@ async function run() {
   })
   app.post('/carts', async(req,res)=>{
     const item = req.body;
+    const cartId = {cartId:item.cartId}
+    const extingCart = await cartCollection.findOne(cartId);
+    if(extingCart){
+      return res.send([])
+    }
     const result = await cartCollection.insertOne(item);
     res.send(result);
   })
+  // 
 
+  // Payment Intent
+  app.post('/create-payment-intent', async (req,res)=>{
+    const {price} = req.body;
+    const amount = price*100;
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount,
+      currency:'usd',
+      payment_method_types: ['card']
+    });
+    res.send({
+      clientSecret: paymentIntent.client_secret
+    })
+  })
 
 
     await client.db("admin").command({ ping: 1 });
