@@ -90,10 +90,12 @@ async function run() {
           const couresId = payment.couresId;
           const updateResult = await couresCollection.updateOne(
             { _id: new ObjectId(couresId) },
-            { $inc: { 
-              enrolled: 1,
-              availableSeats: -1
-             } }
+            {
+              $inc: {
+                enrolled: 1,
+                availableSeats: -1
+              }
+            }
           );
 
           if (updateResult.modifiedCount === 1) {
@@ -110,6 +112,29 @@ async function run() {
 
     })
 
+    // Enrolled Classes
+    app.get('/enrolled-classes', async (req, res) => {
+      const email = req.query.email;
+      console.log(email)
+      const query = { email: email };
+
+      try {
+        const enrolledClasses = await paymentCollection.find(query).toArray();
+        console.log(enrolledClasses);
+
+        const enrolledClassIds = enrolledClasses.map(item=> new ObjectId(item.couresId));
+
+        const enrolledClassDetails = await couresCollection.find({_id:{
+          $in: enrolledClassIds
+        }}).toArray();
+        console.log(enrolledClassDetails);
+        res.send(enrolledClassDetails)
+      }
+      catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+      }
+    });
 
 
     // All Class
