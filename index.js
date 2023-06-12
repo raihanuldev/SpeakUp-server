@@ -150,6 +150,15 @@ async function run() {
       const result = await couresCollection.insertOne(item);
       res.send(result)
     })
+    // My Added Classes
+    app.get('/my-classes', async(req,res)=>{
+      const email = req.query.email;
+      console.log(email);
+      const query = {instructorEmail:email}
+      const result = await couresCollection.find(query).toArray();
+      res.send(result)
+    })
+
     // WARNING! IAM CHANGED USERS API>>>>
     // users Apis
     app.get('/user', async (req, res) => {
