@@ -137,11 +137,28 @@ async function run() {
     });
 
 
-    // All Class
+    // All Approved Class
     app.get('/allclasses', async (req, res) => {
       const apporvedCoures = await couresCollection.find({ status: "approved" });
       const result = await apporvedCoures.toArray();
       res.send(result);
+    })
+    // All Coures Collections
+    app.get('/classCollection', async (req,res)=>{
+      const result = await couresCollection.find().toArray();
+      res.send(result)
+    })
+    
+    // Update Class Staus Approved
+    app.put('/classCollection/:id',async(req,res)=>{
+      const id = req.params.id;
+      console.log(id);
+      const _id = new ObjectId(id);
+      const result = await couresCollection.findOneAndUpdate(
+        {_id:_id},
+        {$set: {status: 'approved'}}
+      )
+      res.send(result)
     })
 
     app.post('/newclass', async (req, res) => {
@@ -192,7 +209,7 @@ async function run() {
     app.put('/make-admin/:id', async(req,res)=>{
       const id = req.params.id;
       const _id = new ObjectId(id)
-      console.log(_id);
+      // console.log(_id);
       const result = await usersCollection.findOneAndUpdate(
         { _id: _id},
         { $set: {role: 'admin'} }
@@ -204,7 +221,7 @@ async function run() {
     app.put('/make-instructor/:id', async(req,res)=>{
       const id = req.params.id;
       const _id = new ObjectId(id)
-      console.log(_id);
+      // console.log(_id);
       const result = await usersCollection.findOneAndUpdate(
         { _id: _id},
         { $set: {role: 'instructor'} }
