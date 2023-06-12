@@ -199,6 +199,18 @@ async function run() {
         )
       res.send(result)
     })
+
+    // Make Instrucotr
+    app.put('/make-instructor/:id', async(req,res)=>{
+      const id = req.params.id;
+      const _id = new ObjectId(id)
+      console.log(_id);
+      const result = await usersCollection.findOneAndUpdate(
+        { _id: _id},
+        { $set: {role: 'instructor'} }
+        )
+      res.send(result)
+    })
     
 
     // Carts apis
