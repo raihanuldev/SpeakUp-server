@@ -168,6 +168,16 @@ async function run() {
       res.send(result)
     })
 
+    // Update Denied Status
+    app.put('/classDenied/:id', async (req,res)=>{
+      const _id = new ObjectId(req.params.id)
+      const result = await couresCollection.findOneAndUpdate(
+        {_id:_id},
+        {$set: {status: 'denied'}}
+      )
+      res.send(result)
+    })
+
     app.post('/newclass', async (req, res) => {
       const item = req.body;
       console.log(item)
