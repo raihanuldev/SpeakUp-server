@@ -167,6 +167,17 @@ async function run() {
       )
       res.send(result)
     })
+    // Send Feedback
+    app.put('/feedback/:id', async(req,res)=>{
+      const _id =new ObjectId(req.params.id);
+      const message = req.body;
+      console.log(message);
+      const result = await couresCollection.findOneAndUpdate(
+        {_id:_id},
+        {$set:{feedback:message}}
+      )
+      res.send(result)
+    })
 
     // Update Denied Status
     app.put('/classDenied/:id', async (req,res)=>{
