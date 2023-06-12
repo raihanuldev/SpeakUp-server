@@ -182,6 +182,25 @@ async function run() {
       res.send(result);
     })
 
+    // All Users 
+    app.get('/all-users', async (req,res)=>{
+      const result = await usersCollection.find().toArray();
+      res.send(result)
+    })
+    
+      // Make admin Role
+    app.put('/make-admin/:id', async(req,res)=>{
+      const id = req.params.id;
+      const _id = new ObjectId(id)
+      console.log(_id);
+      const result = await usersCollection.findOneAndUpdate(
+        { _id: _id},
+        { $set: {role: 'admin'} }
+        )
+      res.send(result)
+    })
+    
+
     // Carts apis
     app.get('/carts', async (req, res) => {
       const email = req.query.email;
