@@ -156,7 +156,14 @@ async function run() {
       const _id = new ObjectId(id);
       const result = await couresCollection.findOneAndUpdate(
         {_id:_id},
-        {$set: {status: 'approved'}}
+        {
+          $set: {status: 'approved'},
+          $inc: {
+            enrolled: 1,
+            availableSeats: -1,
+          },
+        }
+        
       )
       res.send(result)
     })
