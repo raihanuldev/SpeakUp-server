@@ -122,11 +122,13 @@ async function run() {
         const enrolledClasses = await paymentCollection.find(query).toArray();
         console.log(enrolledClasses);
 
-        const enrolledClassIds = enrolledClasses.map(item=> new ObjectId(item.couresId));
+        const enrolledClassIds = enrolledClasses.map(item => new ObjectId(item.couresId));
 
-        const enrolledClassDetails = await couresCollection.find({_id:{
-          $in: enrolledClassIds
-        }}).toArray();
+        const enrolledClassDetails = await couresCollection.find({
+          _id: {
+            $in: enrolledClassIds
+          }
+        }).toArray();
         console.log(enrolledClassDetails);
         res.send(enrolledClassDetails)
       }
@@ -144,47 +146,47 @@ async function run() {
       res.send(result);
     })
     // All Coures Collections
-    app.get('/classCollection', async (req,res)=>{
+    app.get('/classCollection', async (req, res) => {
       const result = await couresCollection.find().toArray();
       res.send(result)
     })
-    
+
     // Update Class Staus Approved
-    app.put('/classCollection/:id',async(req,res)=>{
+    app.put('/classCollection/:id', async (req, res) => {
       const id = req.params.id;
       console.log(id);
       const _id = new ObjectId(id);
       const result = await couresCollection.findOneAndUpdate(
-        {_id:_id},
+        { _id: _id },
         {
-          $set: {status: 'approved'},
+          $set: { status: 'approved' },
           $inc: {
             enrolled: 1,
             availableSeats: -1,
           },
         }
-        
+
       )
       res.send(result)
     })
     // Send Feedback
-    app.put('/feedback/:id', async(req,res)=>{
-      const _id =new ObjectId(req.params.id);
+    app.put('/feedback/:id', async (req, res) => {
+      const _id = new ObjectId(req.params.id);
       const message = req.body;
       console.log(message);
       const result = await couresCollection.findOneAndUpdate(
-        {_id:_id},
-        {$set:{feedback:message}}
+        { _id: _id },
+        { $set: { feedback: message } }
       )
       res.send(result)
     })
 
     // Update Denied Status
-    app.put('/classDenied/:id', async (req,res)=>{
+    app.put('/classDenied/:id', async (req, res) => {
       const _id = new ObjectId(req.params.id)
       const result = await couresCollection.findOneAndUpdate(
-        {_id:_id},
-        {$set: {status: 'denied'}}
+        { _id: _id },
+        { $set: { status: 'denied' } }
       )
       res.send(result)
     })
@@ -196,10 +198,10 @@ async function run() {
       res.send(result)
     })
     // My Added Classes
-    app.get('/my-classes', async(req,res)=>{
+    app.get('/my-classes', async (req, res) => {
       const email = req.query.email;
       console.log(email);
-      const query = {instructorEmail:email}
+      const query = { instructorEmail: email }
       const result = await couresCollection.find(query).toArray();
       res.send(result)
     })
@@ -228,40 +230,40 @@ async function run() {
     })
 
     // All Users 
-    app.get('/all-users', async (req,res)=>{
+    app.get('/all-users', async (req, res) => {
       const result = await usersCollection.find().toArray();
       res.send(result)
     })
-    
-      // Make admin Role
-    app.put('/make-admin/:id', async(req,res)=>{
+
+    // Make admin Role
+    app.put('/make-admin/:id', async (req, res) => {
       const id = req.params.id;
       const _id = new ObjectId(id)
       // console.log(_id);
       const result = await usersCollection.findOneAndUpdate(
-        { _id: _id},
-        { $set: {role: 'admin'} }
-        )
+        { _id: _id },
+        { $set: { role: 'admin' } }
+      )
       res.send(result)
     })
 
     // Make Instrucotr
-    app.put('/make-instructor/:id', async(req,res)=>{
+    app.put('/make-instructor/:id', async (req, res) => {
       const id = req.params.id;
       const _id = new ObjectId(id)
       // console.log(_id);
       const result = await usersCollection.findOneAndUpdate(
-        { _id: _id},
-        { $set: {role: 'instructor'} }
-        )
+        { _id: _id },
+        { $set: { role: 'instructor' } }
+      )
       res.send(result)
     })
-    
+
 
     // Carts apis
     app.get('/carts', async (req, res) => {
       const email = req.query.email;
-      // console.log(email);
+      console.log(email);
       if (!email) {
         return res.send([])
       }
@@ -271,22 +273,26 @@ async function run() {
     })
     app.post('/carts', async (req, res) => {
       const item = req.body;
-      const cartId = { cartId: item.cartId }
-      const extingCart = await cartCollection.findOne(cartId);
-      if (extingCart) {
+      const { cartId, email } = item.cartId
+
+      const extingCart = await cartCollection.findOne({ cartId });
+      if (extingCart && extingCart.cartId === cartId && extingCart.email === email) {
+        console.log('badija tomak add kora jabe nah tomi beshi jargoy korcho');
         return res.send([])
       }
-      const result = await cartCollection.insertOne(item);
-      res.send(result);
+      else {
+        const result = await cartCollection.insertOne(item);
+        res.send(result);
+      }
     })
     // Single Cart Remove
-    app.delete('/carts', async (req,res)=>{
+    app.delete('/carts', async (req, res) => {
       const couresId = req.body;
       const query = couresId;
       const result = await cartCollection.deleteOne(query);
       res.send(result)
-    }) 
-    
+    })
+
 
 
     // Payment Intent
@@ -304,11 +310,11 @@ async function run() {
     })
 
     // Payment Histroy
-    app.get('/payment-history', async(req,res)=>{
+    app.get('/payment-history', async (req, res) => {
       const email = req.query.email;
       // console.log(email);
-      const query = {email:email};
-      const paymentHistory = await paymentCollection.find(query).sort({date:-1}).toArray();
+      const query = { email: email };
+      const paymentHistory = await paymentCollection.find(query).sort({ date: -1 }).toArray();
       res.send(paymentHistory)
     })
 
