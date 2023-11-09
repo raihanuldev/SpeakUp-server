@@ -274,16 +274,17 @@ async function run() {
     app.post('/carts', async (req, res) => {
       const item = req.body;
       const { cartId, email } = item.cartId
-
-      const extingCart = await cartCollection.findOne({ cartId });
-      if (extingCart && extingCart.cartId === cartId && extingCart.email === email) {
-        console.log('badija tomak add kora jabe nah tomi beshi jargoy korcho');
-        return res.send([])
-      }
-      else {
-        const result = await cartCollection.insertOne(item);
-        res.send(result);
-      }
+      const result = await cartCollection.insertOne(item);
+      res.send(result);
+      
+      // const extingCart = await cartCollection.findOne({ cartId });
+      // if (extingCart && extingCart.cartId === cartId && extingCart.email === email) {
+      //   console.log('badija tomak add kora jabe nah tomi beshi jargoy korcho');
+      //   return res.send([])
+      // }
+      // else {
+        
+      // }
     })
     // Single Cart Remove
     app.delete('/carts', async (req, res) => {
