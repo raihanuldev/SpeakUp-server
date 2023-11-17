@@ -99,19 +99,36 @@ async function run() {
         ipn_url: 'http://localhost:3030/ipn',
         shipping_method: 'Online Coures',
         product_name: name,
+        product_category: "Online Coures",
         product_profile: 'Coures',
         cus_email: email,
+        cus_phone: '1234567890',
         product_id: cartId,
-        couresId: _id
+        couresId: _id,
+        cus_add1: 'Dhaka',
+        cus_add2: 'Dhaka',
+        cus_city: 'Dhaka',
+        cus_state: 'Dhaka',
+        cus_postcode: '1000',
+        cus_country: 'Bangladesh',
+        cus_fax: '01711111111',
+        ship_name: 'Customer Name',
+        ship_add1: 'Dhaka',
+        ship_add2: 'Dhaka',
+        ship_city: 'Dhaka',
+        ship_state: 'Dhaka',
+        ship_postcode: 1000,
+        ship_country: 'Bangladesh',
     };
     console.log(data);
-    // const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
-    // sslcz.init(data).then(apiResponse => {
-    //     // Redirect the user to payment gateway
-    //     let GatewayPageURL = apiResponse.GatewayPageURL
-    //     res.redirect(GatewayPageURL)
-    //     console.log('Redirecting to: ', GatewayPageURL)
-    // });
+    const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
+    sslcz.init(data).then(apiResponse => {
+      console.log(apiResponse);
+        // Redirect the user to payment gateway
+        let GatewayPageURL = apiResponse.GatewayPageURL
+        res.send({url: GatewayPageURL})
+        console.log('Redirecting to: ', GatewayPageURL)
+    });
     })
 
     // Stripe Payment  Releted Apis... plz igonore for /payments path. cz at frist i added stripe
