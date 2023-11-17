@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const SSLCommerzPayment = require('sslcommerz-lts')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors');
 require('dotenv').config();
@@ -21,6 +22,10 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   }
 });
+// SSL commerce.
+const store_id =process.env.ssl_store_id;
+const store_passwd = process.env.ssl_store_pass;
+const is_live = false;
 
 async function run() {
   try {
@@ -76,7 +81,40 @@ async function run() {
       }
     });
 
-    // Payment Releted Apis
+    // Ssl-Commarce APi Added
+    // to generate UniqueID---Transaction_id
+    const tran_id = new ObjectId().toString();
+    app.post('/sslPay', async(req,res)=>{
+      // console.log(req.body);
+      const {price,email,name,cartId,_id} = req.body;
+      // calculete Price On BDT
+      const bdtPrice = 110*price;
+      const data = {
+        total_amount: bdtPrice,
+        currency: 'BDT',
+        tran_id: tran_id, // use unique tran_id for each api call
+        success_url: 'http://localhost:3030/success',
+        fail_url: 'http://localhost:3030/fail',
+        cancel_url: 'http://localhost:3030/cancel',
+        ipn_url: 'http://localhost:3030/ipn',
+        shipping_method: 'Online Coures',
+        product_name: name,
+        product_profile: 'Coures',
+        cus_email: email,
+        product_id: cartId,
+        couresId: _id
+    };
+    console.log(data);
+    // const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
+    // sslcz.init(data).then(apiResponse => {
+    //     // Redirect the user to payment gateway
+    //     let GatewayPageURL = apiResponse.GatewayPageURL
+    //     res.redirect(GatewayPageURL)
+    //     console.log('Redirecting to: ', GatewayPageURL)
+    // });
+    })
+
+    // Stripe Payment  Releted Apis... plz igonore for /payments path. cz at frist i added stripe
     app.post('/payments', async (req, res) => {
       const payment = req.body;
       const result = await paymentCollection.insertOne(payment);
