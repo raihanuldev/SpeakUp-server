@@ -93,10 +93,10 @@ async function run() {
         total_amount: bdtPrice,
         currency: 'BDT',
         tran_id: tran_id, // use unique tran_id for each api call
-        success_url: 'http://localhost:3030/success',
-        fail_url: 'http://localhost:3030/fail',
-        cancel_url: 'http://localhost:3030/cancel',
-        ipn_url: 'http://localhost:3030/ipn',
+        success_url: 'abc6557ca5672c76@ssl/success',
+        fail_url: 'http://localhost:5000/fail',
+        cancel_url: 'http://localhost:5000/cancel',
+        ipn_url: 'http://localhost:5000/ipn',
         shipping_method: 'Online Coures',
         product_name: name,
         product_category: "Online Coures",
@@ -129,6 +129,8 @@ async function run() {
         res.send({url: GatewayPageURL})
         console.log('Redirecting to: ', GatewayPageURL)
     });
+
+
     })
 
     // Stripe Payment  Releted Apis... plz igonore for /payments path. cz at frist i added stripe
