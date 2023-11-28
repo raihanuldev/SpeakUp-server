@@ -43,11 +43,12 @@ async function run() {
    */
     app.post('/chat',async(req,res)=>{
       const userQuery = req.body.query;
-      const text ='hi'
+      // console.log(req.body);
+      // console.log(req.body.query);
       // use open Ai  APi to generate a model response
       const modelResponse = await openai.chat.completions.create({
         model:'text-davinci-003',
-        prompt: text,
+        prompt: userQuery,
         max_tokens:150, 
       });
 
@@ -414,5 +415,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log('Hey Dev! No pain no gain');
+  console.log('Hey Dev! No pain no gain',port);
 })
