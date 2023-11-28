@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
+const { OpenAI } = require('openai');
 const SSLCommerzPayment = require('sslcommerz-lts')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 const stripe = require('stripe')(process.env.DB_PAYMENT_KEY)
+const openai = new OpenAI({ apiKey: process.env.openAI_key })
 
 // middleWare
 app.use(cors())
@@ -23,7 +25,7 @@ const client = new MongoClient(uri, {
   }
 });
 // SSL commerce.
-const store_id =process.env.ssl_store_id;
+const store_id = process.env.ssl_store_id;
 const store_passwd = process.env.ssl_store_pass;
 const is_live = false;
 
@@ -35,6 +37,23 @@ async function run() {
     const usersCollection = client.db('Language').collection('usersCollection');
     const cartCollection = client.db('Language').collection('cartCollection');
     const paymentCollection = client.db('Language').collection('paymentCollection');
+
+    /*
+   =>=>=>=>=>Live Chat useing OpenAi Key =>=>=>=>=>=>
+   */
+    app.post('/chat',async(req,res)=>{
+      const userQuery = req.body.query;
+      const text ='hi'
+      // use open Ai  APi to generate a model response
+      const modelResponse = await openai.chat.completions.create({
+        model:'text-davinci-003',
+        prompt: text,
+        max_tokens:150, 
+      });
+
+      console.log(modelResponse.choices[0].text.trim());
+      res.send({message:modelResponse.choices[0].text.trim()})
+    })
 
     // Public Apis
     // top 6 Coures.
@@ -84,11 +103,11 @@ async function run() {
     // Ssl-Commarce APi Added
     // to generate UniqueID---Transaction_id
     const tran_id = new ObjectId().toString();
-    app.post('/sslPay', async(req,res)=>{
+    app.post('/sslPay', async (req, res) => {
       // console.log(req.body);
-      const {price,email,name,cartId,_id} = req.body;
+      const { price, email, name, cartId, _id } = req.body;
       // calculete Price On BDT
-      const bdtPrice = 110*price;
+      const bdtPrice = 110 * price;
       const data = {
         total_amount: bdtPrice,
         currency: 'BDT',
@@ -119,16 +138,16 @@ async function run() {
         ship_state: 'Dhaka',
         ship_postcode: 1000,
         ship_country: 'Bangladesh',
-    };
-    console.log(data);
-    const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
-    sslcz.init(data).then(apiResponse => {
-      console.log(apiResponse);
+      };
+      console.log(data);
+      const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
+      sslcz.init(data).then(apiResponse => {
+        console.log(apiResponse);
         // Redirect the user to payment gateway
         let GatewayPageURL = apiResponse.GatewayPageURL
-        res.send({url: GatewayPageURL})
+        res.send({ url: GatewayPageURL })
         console.log('Redirecting to: ', GatewayPageURL)
-    });
+      });
 
 
     })
@@ -333,14 +352,14 @@ async function run() {
       const { cartId, email } = item.cartId
       const result = await cartCollection.insertOne(item);
       res.send(result);
-      
+
       // const extingCart = await cartCollection.findOne({ cartId });
       // if (extingCart && extingCart.cartId === cartId && extingCart.email === email) {
       //   console.log('badija tomak add kora jabe nah tomi beshi jargoy korcho');
       //   return res.send([])
       // }
       // else {
-        
+
       // }
     })
     // Single Cart Remove
@@ -375,6 +394,8 @@ async function run() {
       const paymentHistory = await paymentCollection.find(query).sort({ date: -1 }).toArray();
       res.send(paymentHistory)
     })
+
+
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
