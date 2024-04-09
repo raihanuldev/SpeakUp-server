@@ -7,7 +7,7 @@ const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 const stripe = require('stripe')(process.env.DB_PAYMENT_KEY)
-const openai = new OpenAI({ apiKey: process.env.openAI_key })
+const openai = new OpenAI({ apiKey: process.env.openAI_key |11111})
 
 // middleWare
 app.use(cors())
