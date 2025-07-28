@@ -396,6 +396,18 @@ async function run() {
     res.status(500).send({ error: 'Internal Server Error' });
   }
 });
+//is club member check
+app.get('/is-club-member', async (req, res) => {
+  const email = req.query.email;
+  try {
+    const member = await clubMemberCollection.findOne({ email });
+    res.send({ isMember: !!member });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ isMember: false });
+  }
+});
+
     // Make Instrucotr
     app.put('/make-instructor/:id', async (req, res) => {
       const id = req.params.id;
