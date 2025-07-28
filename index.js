@@ -386,7 +386,16 @@ async function run() {
         res.status(500).send({ message: "Server Error" });
       }
     });
-
+    //get all club members
+    app.get('/club-members', async (req, res) => {
+  try {
+    const members = await clubMemberCollection.find().toArray();
+    res.send(members);
+  } catch (error) {
+    console.error("Failed to fetch club members:", error);
+    res.status(500).send({ error: 'Internal Server Error' });
+  }
+});
     // Make Instrucotr
     app.put('/make-instructor/:id', async (req, res) => {
       const id = req.params.id;
