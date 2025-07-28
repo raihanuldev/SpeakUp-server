@@ -414,6 +414,6 @@ app.get('/', (req, res) => {
   res.send('Assalamualikom.Server Is Running')
 })
 
-app.listen(port, () => {
-  console.log('Hey Dev! No pain no gain',port);
-})
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
+});
