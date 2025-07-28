@@ -115,9 +115,9 @@ async function run() {
         currency: 'BDT',
         tran_id: tran_id, // use unique tran_id for each api call
         success_url: 'abc6557ca5672c76@ssl/success',
-        fail_url: 'http://localhost:5000/fail',
-        cancel_url: 'http://localhost:5000/cancel',
-        ipn_url: 'http://localhost:5000/ipn',
+        fail_url: 'https://speakup-ivory.vercel.app/fail',
+        cancel_url: 'https://speakup-ivory.vercel.app/cancel',
+        ipn_url: 'https://speakup-ivory.vercel.app/ipn',
         shipping_method: 'Online Coures',
         product_name: name,
         product_category: "Online Coures",
