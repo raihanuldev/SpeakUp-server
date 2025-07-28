@@ -7,7 +7,7 @@ const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 const stripe = require('stripe')(process.env.DB_PAYMENT_KEY)
-const openai = new OpenAI({ apiKey: process.env.openAI_key |11111})
+const openai = new OpenAI({ apiKey: process.env.openAI_key | 11111 })
 
 // middleWare
 app.use(cors())
@@ -37,23 +37,24 @@ async function run() {
     const usersCollection = client.db('Language').collection('usersCollection');
     const cartCollection = client.db('Language').collection('cartCollection');
     const paymentCollection = client.db('Language').collection('paymentCollection');
-
+    const contentCollection = client.db('Language').collection('content-collections');
+    const clubMemberCollection = client.db('Language').collection('clubMemberCollection');
     /*
    =>=>=>=>=>Live Chat useing OpenAi Key =>=>=>=>=>=>
    */
-    app.post('/chat',async(req,res)=>{
+    app.post('/chat', async (req, res) => {
       const userQuery = req.body.query;
       // console.log(req.body);
       // console.log(req.body.query);
       // use open Ai  APi to generate a model response
       const modelResponse = await openai.chat.completions.create({
-        model:'text-davinci-003',
+        model: 'text-davinci-003',
         prompt: userQuery,
-        max_tokens:150, 
+        max_tokens: 150,
       });
 
       console.log(modelResponse.choices[0].text.trim());
-      res.send({message:modelResponse.choices[0].text.trim()})
+      res.send({ message: modelResponse.choices[0].text.trim() })
     })
 
     // Public Apis
@@ -189,27 +190,34 @@ async function run() {
 
     })
 
-    // Enrolled Classes
     app.get('/enrolled-classes', async (req, res) => {
       const email = req.query.email;
-      console.log(email)
-      const query = { email: email };
+      console.log('Request email:', email);
 
       try {
-        const enrolledClasses = await paymentCollection.find(query).toArray();
-        console.log(enrolledClasses);
+        // Check if email exists in clubMemberCollection
+        const isClubMember = await clubMemberCollection.findOne({ email: email });
 
-        const enrolledClassIds = enrolledClasses.map(item => new ObjectId(item.couresId));
+        let enrolledClassDetails;
 
-        const enrolledClassDetails = await couresCollection.find({
-          _id: {
-            $in: enrolledClassIds
-          }
-        }).toArray();
-        console.log(enrolledClassDetails);
-        res.send(enrolledClassDetails)
-      }
-      catch (error) {
+        if (isClubMember) {
+          // If club member, give access to all courses
+          enrolledClassDetails = await couresCollection.find({}).toArray();
+        } else {
+          // If not a club member, fetch enrolled classes from paymentCollection
+          const enrolledClasses = await paymentCollection.find({ email: email }).toArray();
+
+          const enrolledClassIds = enrolledClasses.map(item => new ObjectId(item.couresId));
+
+          enrolledClassDetails = await couresCollection.find({
+            _id: { $in: enrolledClassIds }
+          }).toArray();
+        }
+
+        console.log('Enrolled Classes:', enrolledClassDetails);
+        res.send(enrolledClassDetails);
+
+      } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
       }
@@ -282,6 +290,34 @@ async function run() {
       const result = await couresCollection.find(query).toArray();
       res.send(result)
     })
+    // Add Module
+    app.patch("/content-collections/:courseId", async (req, res) => {
+      const courseId = req.params.courseId;
+      const newModule = req.body;
+      console.log(courseId, newModule);
+      try {
+        const result = await contentCollection.updateOne(
+          { courseId: courseId },
+          { $push: { content: newModule } },
+          { upsert: true }
+        );
+        res.send({ success: true, result });
+      } catch (err) {
+        res.status(500).send({ success: false, message: "Database error", error: err });
+      }
+    });
+
+    //get content by courseId
+    app.get("/content-collections/:courseId", async (req, res) => {
+      const courseId = req.params.courseId;
+      try {
+        const doc = await contentCollection.findOne({ courseId });
+        if (!doc) return res.status(404).json({ message: "No content found" });
+        res.json(doc);
+      } catch (err) {
+        res.status(500).json({ error: "Internal server error", err });
+      }
+    });
 
     // WARNING! IAM CHANGED USERS API>>>>
     // users Apis
@@ -323,6 +359,33 @@ async function run() {
       )
       res.send(result)
     })
+    // Add a club member if not already exists
+    app.post('/add-club-member', async (req, res) => {
+      const { email } = req.body;
+
+      if (!email) {
+        return res.status(400).send({ message: "Email is required" });
+      }
+
+      try {
+        // Check if already exists
+        const existing = await clubMemberCollection.findOne({ email });
+        if (existing) {
+          return res.status(200).send({ message: "Already a club member" });
+        }
+
+        // Insert new member
+        const result = await clubMemberCollection.insertOne({
+          email,
+          role: "member"
+        });
+
+        res.status(201).send({ message: "Added to club members", insertedId: result.insertedId });
+      } catch (error) {
+        console.error("Failed to add club member:", error);
+        res.status(500).send({ message: "Server Error" });
+      }
+    });
 
     // Make Instrucotr
     app.put('/make-instructor/:id', async (req, res) => {
@@ -414,6 +477,6 @@ app.get('/', (req, res) => {
   res.send('Assalamualikom.Server Is Running')
 })
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
 });
